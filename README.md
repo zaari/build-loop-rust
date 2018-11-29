@@ -1,0 +1,22 @@
+
+# build-loop-rust
+
+This is a small script which helps Rust development when an IDE is not used.
+It's run on the same directory where Cargo.toml file is located. 
+
+# Features
+
+* Shows line counts
+* Runs cargo update
+* Runs cargo outdated
+* Runs cargo test (or any other subcommand) when any source file is changed
+
+# Installation
+
+You have to add the location of the script to PATH environment variable or
+save (or link) the script to a location on the PATH.
+
+It's expected that [cargo-outdated] extension is installed.
+
+[cargo-outdated]: https://github.com/kbknapp/cargo-outdated
+
