@@ -1,29 +1,35 @@
 #!/bin/sh
 
 #
-# Cyclic build script triggered by file changes. Useful when editing with an ordinary
-# text editor.
+# Cyclic build script triggered by file changes. Helpful when editing Rust 
+# source code without an IDE or language server.
 #
-# yaourt -S inotify-tools
+# Dependency: 
+#   inotify-tools
+#   cargo-audit
+#   cargo-outdated
 #
 
 COMMAND=${1:-test}
 
-# Some statistics
-find src -name "*.rs" | xargs wc -l
-
-# Show outdated crates
-echo ""
+# Show vulnerable and outdated crates
 cargo update
 echo ""
+cargo audit
+echo ""
+sleep 1s
 cargo outdated
 echo ""
+sleep 1s
 
-# Let's use incremental build if available
-export CARGO_INCREMENTAL=1
+# Some statistics
+echo ""
+find src -name "*.rs" | xargs wc -l
+sleep 1s
 
 # The initial build
-echo "Running cargo with command '$COMMAND'"
+echo ""
+echo "Running cargo with subcommand '$COMMAND'"
 cargo $COMMAND
 
 # Build on demand
