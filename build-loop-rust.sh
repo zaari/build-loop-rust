@@ -33,7 +33,7 @@ echo "Running cargo with subcommand '$COMMAND'"
 cargo $COMMAND
 
 # Build on demand
-while inotifywait -e modify -r . &>/dev/null
+while inotifywait -e modify --exclude target -r . &>/dev/null
     do sync
     reset
     cargo $COMMAND
