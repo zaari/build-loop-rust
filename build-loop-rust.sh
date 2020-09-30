@@ -15,12 +15,10 @@ COMMAND=${1:-test}
 # Show vulnerable and outdated crates
 cargo update
 echo ""
-cargo audit
+cargo help auditx &>/dev/null && cargo audit && sleep 1s
 echo ""
-sleep 1s
-cargo outdated
+cargo help outdated &>/dev/null&& cargo outdated -R && sleep 1s 
 echo ""
-sleep 1s
 
 # Some statistics
 echo ""
