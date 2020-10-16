@@ -14,7 +14,7 @@ COMMAND=${1:-test}
 
 # Update, show vulnerable crates and list outdated root crates
 cargo update && echo ""
-cargo help auditx &>/dev/null && cargo audit && sleep 1s && echo ""
+cargo help audit &>/dev/null && cargo audit && sleep 1s && echo ""
 cargo help outdated &>/dev/null && cargo outdated -R && sleep 1s && echo ""
 
 # Some statistics
