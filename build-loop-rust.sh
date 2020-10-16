@@ -5,35 +5,30 @@
 # source code without an IDE or language server.
 #
 # Dependency: 
-#   inotify-tools
+#   inotify-tools (Linux-only)
 #   cargo-audit
 #   cargo-outdated
 #
 
 COMMAND=${1:-test}
 
-# Show vulnerable and outdated crates
-cargo update
-echo ""
-cargo help auditx &>/dev/null && cargo audit && sleep 1s
-echo ""
-cargo help outdated &>/dev/null&& cargo outdated -R && sleep 1s 
-echo ""
+# Update, show vulnerable crates and list outdated root crates
+cargo update && echo ""
+cargo help auditx &>/dev/null && cargo audit && sleep 1s && echo ""
+cargo help outdated &>/dev/null && cargo outdated -R && sleep 1s && echo ""
 
 # Some statistics
-echo ""
-find src -name "*.rs" | xargs wc -l
-sleep 1s
+find src -name "*.rs" | xargs wc -l && sleep 1s && echo ""
 
 # The initial build
-echo ""
-echo "Running cargo with subcommand '$COMMAND'"
-cargo $COMMAND
+shift
+echo "Running cargo with subcommand '$COMMAND' $*"
+cargo $COMMAND $*
 
 # Build on demand
-while inotifywait -e modify --exclude target -r . &>/dev/null
-    do sync
+while inotifywait -e modify --exclude target -r . &>/dev/null ; do
+    sync
     reset
-    cargo $COMMAND
+    cargo $COMMAND $*
 done
 
