@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Cyclic build script triggered by file changes. Helpful when editing Rust 
+# Cyclic build script which builds when a file changes. Helpful when editing Rust 
 # source code without an IDE or language server.
 #
 # Dependency: 
@@ -21,7 +21,7 @@ cargo help outdated &>/dev/null && cargo outdated -R && sleep 1s && echo ""
 find src -name "*.rs" | xargs wc -l && sleep 1s && echo ""
 
 # The initial build
-shift
+shift 2>/dev/null
 echo "Running cargo with subcommand '$COMMAND' $*"
 cargo $COMMAND $*
 
