@@ -12,13 +12,13 @@
 
 COMMAND=${1:-test}
 
+# Some statistics
+find src -name "*.rs" | xargs wc -l && sleep 1s && echo ""
+
 # Update, show vulnerable crates and list outdated root crates
 cargo update && echo ""
 cargo help audit &>/dev/null && cargo audit && sleep 1s && echo ""
 cargo help outdated &>/dev/null && cargo outdated -R && sleep 1s && echo ""
-
-# Some statistics
-find src -name "*.rs" | xargs wc -l && sleep 1s && echo ""
 
 # The initial build
 shift 2>/dev/null
@@ -28,7 +28,7 @@ cargo $COMMAND $*
 # Build on demand
 while inotifywait -e modify --exclude target -r . &>/dev/null ; do
     sync
-    reset
+    clear
     cargo $COMMAND $*
 done
 
