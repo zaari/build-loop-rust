@@ -4,7 +4,7 @@
 # Cyclic build script which builds when a file changes. Helpful when editing Rust 
 # source code without an IDE or language server. This script is similar to cargo-watch extension.
 #
-# Dependency: 
+# Dependencies: 
 #   inotify-tools (Linux-only)
 #   cargo-audit
 #   cargo-outdated
