@@ -2,7 +2,8 @@
 # build-loop-rust
 
 This is a small script which helps Rust development when an IDE is not used.
-It's run on the same directory where Cargo.toml file is located. 
+Its behaviour is similar to `cargo watch` command.
+The script is run on the same directory where Cargo.toml file is located. 
 
 # Features
 
