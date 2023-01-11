@@ -1,7 +1,7 @@
 
 # build-loop-rust
 
-Cyclic build script which builds when a file changes. Helpful when editing Rust 
+A looping build script which builds when a file changes. Helpful when editing Rust 
 source code without a proper IDE or language server. This script uses cargo-watch if 
 it is available or Linux inotify if not.
 
